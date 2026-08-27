@@ -5,3 +5,26 @@ Review this pull request with the following input (in yaml format) and diff:
 # DIFF
 
 {{ DIFF }}
+{% if PR_COMMENTS %}
+
+# PR CONVERSATION COMMENTS
+
+Comments left on the pull request conversation, oldest first.
+
+{{ PR_COMMENTS }}
+{% endif %}
+{% if REVIEW_COMMENTS %}
+
+# EXISTING REVIEW COMMENTS ON THE CODE
+
+Discussion threads attached to the code, oldest first. Every thread points at one place in the code
+and holds its replies in `comments`, oldest first.
+
+* `file` plus `line` (or `lines` for a range) is the place the thread is attached to, in the new
+  version of the file when `side` is RIGHT, in the old one when `side` is LEFT.
+* `diff_hunk` is the code as it was when the thread started, and `url` links to the thread.
+* Comments authored by `github-actions[bot]` are your own, left by previous runs of this review.
+* Threads on code that is no longer part of the diff are excluded.
+
+{{ REVIEW_COMMENTS }}
+{% endif %}
